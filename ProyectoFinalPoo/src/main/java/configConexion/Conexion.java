@@ -8,9 +8,9 @@ import java.sql.SQLException;
 
 public class Conexion { 
     private Connection con;
-    private final String url = "jdbc:sqlserver://localhost\\Ferreteria:1433;databaseName=FerreteriaNueva;encrypt=true;trustServerCertificate=true";
-    private final String user = "LogProyectoPOO";
-    private final String pass = "12345";
+    private final String url = "jdbc:sqlserver://localhost:1433;databaseName=FerreteriaNueva;encrypt=true;trustServerCertificate=true";
+    private final String user = "ProyectoAdmin";
+    private final String pass = "Monti123";
  
     public Connection conectar() {
         try {
