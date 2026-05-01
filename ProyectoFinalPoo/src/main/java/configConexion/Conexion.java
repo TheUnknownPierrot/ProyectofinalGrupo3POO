@@ -9,5 +9,5 @@ package configConexion;
  * @author lalon
  */
 public class Conexion {
-    
+    int clase;
 }
