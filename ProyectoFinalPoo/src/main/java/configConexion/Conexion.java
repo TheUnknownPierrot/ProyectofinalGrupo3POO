@@ -10,4 +10,11 @@ package configConexion;
  */
 public class Conexion {
     int clase;
+
+    public Conexion(int clase) {
+        this.clase = clase;
+    }
+    
+    
+     
 }
