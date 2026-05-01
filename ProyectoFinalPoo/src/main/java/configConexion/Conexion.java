@@ -3,7 +3,8 @@ package ConfigConexion;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
- 
+
+//Esta es la clase conexion
 public class Conexion { 
     private Connection con;
     private final String url = "jdbc:sqlserver://localhost\\Ferreteria:1433;databaseName=FerreteriaNueva;encrypt=true;trustServerCertificate=true";
