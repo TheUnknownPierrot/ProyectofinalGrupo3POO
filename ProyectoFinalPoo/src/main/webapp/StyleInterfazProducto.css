@@ -1,0 +1,237 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 8 may 2026, 12:20:09 p. m.
+    Author     : alan
+*/
+
+/* --- VARIABLES DE COLOR --- */
+:root {
+    --amarillo-principal: #f1c40f;
+    --amarillo-oscuro: #f39c12;
+    --negro-suave: #2c3e50;
+    --negro-total: #1a252f;
+    --fondo-claro: #fffdf2;
+    --blanco: #ffffff;
+}
+
+/* --- ESTILOS DE BASE --- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--fondo-claro);
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    color: var(--negro-suave);
+}
+
+h1 {
+    color: var(--negro-suave);
+    margin-top: 80px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 800;
+}
+
+.subtitulo {
+    margin-bottom: 40px;
+    color: #7f8c8d;
+    font-size: 1.1rem;
+}
+
+/* --- BUSCADOR SIMÉTRICO (IZQUIERDA) --- */
+.buscador-contenedor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--amarillo-principal);
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    border-radius: 0 0 15px 0;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.buscador-contenedor:hover {
+    background-color: var(--amarillo-oscuro);
+}
+
+.lupa-icon {
+    fill: var(--negro-suave);
+    width: 26px;
+    height: 26px;
+}
+
+.buscador-contenedor input {
+    width: 200px; /* Ancho del buscador */
+    padding: 8px 15px;
+    margin-left: 12px;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    font-size: 15px;
+    background-color: var(--blanco);
+    color: var(--negro-suave);
+}
+
+/* --- CARRITO FLOTANTE (DERECHA) --- */
+.carrito-flotante {
+    background-color: var(--amarillo-principal);
+    color: var(--negro-suave);
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px 25px;
+    border-radius: 0px 0px 0px 15px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    box-shadow: -2px 2px 10px rgba(0,0,0,0.1);
+    cursor: pointer;
+    z-index: 1000;
+    transition: background-color 0.3s;
+}
+
+.carrito-flotante:hover {
+    background-color: var(--amarillo-oscuro);
+}
+
+/* --- CUADRÍCULA DE PRODUCTOS --- */
+.caja-de-productos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.producto {
+    background-color: var(--blanco);
+    border: 2px solid var(--amarillo-principal);
+    border-radius: 12px;
+    padding: 15px;
+    width: 200px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.producto:hover {
+    transform: translateY(-5px);
+    border-color: var(--amarillo-oscuro);
+    box-shadow: 0px 8px 15px rgba(243, 156, 18, 0.2);
+}
+
+.producto img {
+    width: 100%;       
+    height: 140px;      
+    object-fit: contain; 
+    border-radius: 8px;
+    background-color: #fafafa;
+    margin-bottom: 10px;
+}
+
+.producto h3 {
+    margin: 5px 0;
+    font-size: 16px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--negro-suave);
+}
+
+.producto p {
+    color: var(--amarillo-oscuro);
+    font-size: 20px;
+    font-weight: 800;
+    margin: 8px 0;
+}
+
+.producto button {
+    background-color: var(--negro-suave);
+    color: var(--blanco); /* TEXTO BLANCO */
+    border: none;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.2s;
+}
+
+.producto button:hover {
+    background-color: var(--negro-total);
+}
+
+/* --- VENTANA DEL CARRITO (MODAL) --- */
+#ventana-carrito {
+    display: none; /* Controlar visibilidad con Java */
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: var(--blanco);
+    width: 90%;
+    max-width: 400px;
+    padding: 25px;
+    border: 3px solid var(--amarillo-principal);
+    border-radius: 20px;
+    box-shadow: 0px 20px 50px rgba(0,0,0,0.3);
+    z-index: 1001;
+    text-align: left;
+}
+
+.titulo-modal {
+    border-bottom: 2px solid var(--amarillo-principal);
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+.total-texto {
+    color: var(--amarillo-oscuro);
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+
+.btn-pago {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.btn-secundario {
+    background-color: var(--negro-suave);
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* Fondo oscuro detrás del modal */
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
