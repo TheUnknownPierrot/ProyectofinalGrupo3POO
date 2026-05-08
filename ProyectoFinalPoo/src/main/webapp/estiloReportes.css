@@ -1,0 +1,499 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : May 8, 2026, 12:21:37 PM
+    Author     : lalon
+*/
+/* Reset y estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f0f4f8;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    padding: 2rem 1.5rem;
+    color: #1e293b;
+}
+
+.app-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* FRANJA AMARILLA */
+.report-header {
+    background: #fbbf24;
+    border-radius: 28px;
+    padding: 1.2rem 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.report-header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: #0f172a;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Layout dos columnas */
+.dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.calendar-section {
+    flex: 1.2;
+    min-width: 280px;
+}
+
+.sales-section {
+    flex: 2.5;
+    min-width: 350px;
+}
+
+/* Tarjetas */
+.card {
+    background: #ffffff;
+    border-radius: 32px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+    padding: 1.8rem 2rem;
+    height: 100%;
+}
+
+.section-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 1.4rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid #fbbf24;
+    display: inline-block;
+    color: #0f172a;
+}
+
+/* Calendario */
+.date-picker-wrapper {
+    margin: 1rem 0 1.2rem 0;
+}
+
+.date-picker-wrapper label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #334155;
+    font-size: 0.95rem;
+}
+
+.date-input {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 1rem;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 24px;
+    background-color: #f9fafb;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.date-input:focus {
+    outline: none;
+    border-color: #fbbf24;
+    box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.2);
+}
+
+/* Botón de búsqueda convertido en enlace */
+.btn-search {
+    background: #1e293b;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 40px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: inherit;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.btn-search:hover {
+    background: #0f172a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.cal-note {
+    margin-top: 1.2rem;
+    font-size: 0.75rem;
+    color: #5b6e8c;
+    text-align: center;
+    background: #f8fafc;
+    padding: 8px;
+    border-radius: 30px;
+}
+
+/* Reportes del día */
+.fecha-actual {
+    font-size: 1.2rem;
+    font-weight: 600;
+    background: #fef9e6;
+    display: inline-block;
+    padding: 6px 18px;
+    border-radius: 40px;
+    margin-bottom: 1.5rem;
+    color: #b45309;
+    border-left: 4px solid #fbbf24;
+}
+
+.ventas-lista {
+    max-height: 550px;
+    overflow-y: auto;
+    padding-right: 6px;
+    margin-bottom: 1rem;
+}
+
+.ventas-lista::-webkit-scrollbar {
+    width: 6px;
+}
+
+.ventas-lista::-webkit-scrollbar-track {
+    background: #e2e8f0;
+    border-radius: 10px;
+}
+
+.ventas-lista::-webkit-scrollbar-thumb {
+    background: #fbbf24;
+    border-radius: 10px;
+}
+
+/* Producto individual */
+.producto-item {
+    background: #f9f9fc;
+    border-radius: 20px;
+    padding: 0.9rem 1rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #eef2f6;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.producto-item:hover {
+    background: #ffffff;
+    border-color: #fed7aa;
+}
+
+.producto-info {
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+}
+
+.prod-nombre {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #0f172a;
+}
+
+.prod-precio {
+    font-size: 0.8rem;
+    color: #5b6e8c;
+    margin-top: 3px;
+}
+
+.prod-stats {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.prod-cantidad {
+    background: #fbbf24;
+    color: #1e293b;
+    font-weight: 800;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    min-width: 70px;
+    text-align: center;
+}
+
+.prod-subtotal {
+    font-weight: 700;
+    color: #0f3b2c;
+    background: #e6f7ec;
+    padding: 5px 12px;
+    border-radius: 40px;
+    font-size: 0.9rem;
+}
+
+.total-ventas {
+    background: #1e293b;
+    color: #fbbf24;
+    padding: 1rem 1.2rem;
+    border-radius: 40px;
+    font-weight: 800;
+    font-size: 1.4rem;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.note-simulacion {
+    font-size: 0.7rem;
+    text-align: center;
+    margin-top: 1.2rem;
+    background: #f1f5f9;
+    padding: 0.6rem;
+    border-radius: 24px;
+    color: #3b4e6e;
+}
+
+/* ========== MODAL / POPUP (sin JavaScript, usa :target) ========== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+}
+
+/* Mostrar el modal cuando está como target (al hacer clic en #reporteModal) */
+.modal:target {
+    display: block;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 3% auto;
+    width: 90%;
+    max-width: 700px;
+    border-radius: 32px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+    animation: slideUp 0.3s ease;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 3px solid #fbbf24;
+    background: #fef9e6;
+    border-radius: 32px 32px 0 0;
+}
+
+.modal-header h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+}
+
+.modal-close {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #5b6e8c;
+    text-decoration: none;
+    transition: all 0.2s;
+    line-height: 1;
+    display: inline-block;
+}
+
+.modal-close:hover {
+    color: #dc2626;
+    transform: scale(1.1);
+}
+
+.modal-body {
+    padding: 1.8rem 2rem;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.modal-fecha {
+    font-size: 1.2rem;
+    font-weight: 600;
+    background: #fef9e6;
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 40px;
+    margin-bottom: 1.5rem;
+    color: #b45309;
+    border-left: 4px solid #fbbf24;
+}
+
+.modal-lista-productos {
+    margin-bottom: 1.5rem;
+    max-height: 450px;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.modal-lista-productos::-webkit-scrollbar {
+    width: 5px;
+}
+
+.modal-lista-productos::-webkit-scrollbar-track {
+    background: #e2e8f0;
+    border-radius: 10px;
+}
+
+.modal-lista-productos::-webkit-scrollbar-thumb {
+    background: #fbbf24;
+    border-radius: 10px;
+}
+
+.modal-producto-item {
+    background: #f9f9fc;
+    border-radius: 20px;
+    padding: 0.9rem 1rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #eef2f6;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.modal-producto-item:hover {
+    background: #ffffff;
+    border-color: #fed7aa;
+}
+
+.modal-prod-nombre {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #0f172a;
+}
+
+.modal-prod-precio {
+    font-size: 0.75rem;
+    color: #5b6e8c;
+    margin-top: 3px;
+}
+
+.modal-prod-stats {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.modal-prod-cantidad {
+    background: #fbbf24;
+    color: #1e293b;
+    font-weight: 800;
+    padding: 5px 12px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    min-width: 65px;
+    text-align: center;
+}
+
+.modal-prod-subtotal {
+    font-weight: 700;
+    color: #0f3b2c;
+    background: #e6f7ec;
+    padding: 5px 12px;
+    border-radius: 40px;
+    font-size: 0.85rem;
+}
+
+.modal-total {
+    background: #1e293b;
+    color: #fbbf24;
+    padding: 1rem 1.2rem;
+    border-radius: 40px;
+    font-weight: 800;
+    font-size: 1.4rem;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 780px) {
+    body {
+        padding: 1rem;
+    }
+    
+    .dashboard {
+        flex-direction: column;
+    }
+    
+    .report-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .section-title {
+        font-size: 1.4rem;
+    }
+    
+    .card {
+        padding: 1.2rem;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .modal-producto-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .modal-prod-stats {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
