@@ -1,0 +1,140 @@
+body{
+    background-color: #f6f1e7; /* Fondo beige claro */
+    font-family: Arial, Helvetica, sans-serif;
+    color: #3b3b3b;
+}
+
+/* ENCABEZADO */
+.header{
+    background: linear-gradient(135deg, #d4aa2a, #f0c84b);
+    color: white;
+    padding: 35px;
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.15);
+}
+
+.header h1{
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* TARJETA */
+.card{
+    border-radius: 18px;
+    border: 2px solid #d8b13c;
+    background-color: #fffdf8;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 18px rgba(0,0,0,0.15);
+}
+
+/* TITULOS */
+h3{
+    color: #2d2d2d;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* INPUTS */
+.form-control{
+    border-radius: 10px;
+    border: 1px solid #d4aa2a;
+    padding: 10px;
+    transition: 0.3s;
+    background-color: #fffdf7;
+}
+
+.form-control:focus{
+    box-shadow: 0px 0px 8px rgba(212, 170, 42, 0.5);
+    border-color: #d4aa2a;
+    background-color: white;
+}
+
+/* BOTONES */
+.btn-guardar{
+    background-color: #2f3b4c; /* Azul oscuro de botones */
+    color: white;
+    padding: 10px 25px;
+    border-radius: 10px;
+    border: none;
+    margin-right: 10px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-guardar:hover{
+    background-color: #1f2a38;
+    transform: scale(1.05);
+    color: white;
+}
+
+.btn-limpiar{
+    background-color: #ffffff;
+    border: 2px solid #d4aa2a;
+    color: #d4aa2a;
+    padding: 10px 25px;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-limpiar:hover{
+    background-color: #d4aa2a;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* TABLA */
+.tabla-clientes{
+    background-color: #fffdf8;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.08);
+}
+
+/* ENCABEZADO TABLA */
+table thead{
+    background-color: #d4aa2a;
+    color: white;
+}
+
+/* FILAS */
+table tbody tr:hover{
+    background-color: #fdf3cf;
+    transition: 0.3s;
+}
+
+/* BORDES TABLA */
+.table{
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* BOTONES GENERALES */
+button{
+    transition: 0.3s;
+}
+
+/* BUSCADOR */
+.search-box{
+    background-color: white;
+    border: 2px solid #d4aa2a;
+    border-radius: 12px;
+    padding: 8px 15px;
+}
+
+/* PRODUCTOS */
+.producto-precio{
+    color: #d48700;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.producto-nombre{
+    color: #2d2d2d;
+    font-weight: bold;
+}
