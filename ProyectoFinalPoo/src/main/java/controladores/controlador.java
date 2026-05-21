@@ -6,7 +6,7 @@
  * Nombre de clase: controlador
  * Fecha de creacion: 05/14/26
  * Version: 1.0
- * Copyright: Luis ALonso Hernandez Mundo
+ * Copyright: Luis Alonso Hernandez Mundo
  */
 package controladores;
 
@@ -17,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import controladores.*;
 import ConfigConexion.Conexion;
 import java.time.LocalDateTime;
@@ -37,19 +38,6 @@ public class controlador extends HttpServlet {
     ResultSet rs;
     int ide;
     
-    
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String accion = request.getParameter("accion");
-       switch(accion){
-           case "principalAdmin":
-               request.getRequestDispatcher("index.html").forward(request, response);
-               break;
-            default:
-               throw new AssertionError();
-        }
-    }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -63,24 +51,36 @@ public class controlador extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String accion = request.getParameter("accion");
-        if (null == accion) {
-            // Redirigir a una página por defecto
-            response.sendRedirect("index.html");
-        } else switch (accion) {
+        
+        if (accion == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+        
+        switch (accion) {
             case "inicioadmin":
-                request.getRequestDispatcher("index.html").forward(request, response);
+                // Verificar sesión
+                HttpSession session = request.getSession(false);
+                if (session != null && session.getAttribute("logueado") != null) {
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                } else {
+                    response.sendRedirect("login.jsp");
+                }
                 break;
             case "clientes":
-                request.getRequestDispatcher("clientes.html").forward(request, response);
+                request.getRequestDispatcher("clientes.jsp").forward(request, response);
                 break;
             case "reportes":
-                request.getRequestDispatcher("reportes.html").forward(request, response);
+                request.getRequestDispatcher("reportes.jsp").forward(request, response);
                 break;    
             case "productos":
-                request.getRequestDispatcher("productos.html").forward(request, response);
+                request.getRequestDispatcher("interfazProducto.jsp").forward(request, response);
+                break;
+            case "logout":
+                cerrarSesion(request, response);
                 break;
             default:
-                response.sendRedirect("index.html");
+                response.sendRedirect("login.jsp");
                 break;
         }
     }
@@ -96,7 +96,16 @@ public class controlador extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doGet(request, response);
+    }
+    
+    private void cerrarSesion(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate(); // Invalida la sesión actual
+        }
+        response.sendRedirect("login.jsp");
     }
 
     /**
@@ -108,5 +117,4 @@ public class controlador extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

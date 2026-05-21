@@ -18,7 +18,7 @@
         body {
             background-image: url('ImagenDeInicio/Ferreteria.png') !important;
         }
-        <%@include file="estiloindex.css"%>
+        <%@include file="css/estiloindex.css"%>
     </style>
 </head>
 <body>
