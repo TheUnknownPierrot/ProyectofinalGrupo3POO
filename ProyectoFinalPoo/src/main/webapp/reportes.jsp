@@ -1,3 +1,10 @@
+<%-- 
+    Document   : reportes
+    Created on : May 21, 2026, 10:31:38 AM
+    Author     : lalon
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>

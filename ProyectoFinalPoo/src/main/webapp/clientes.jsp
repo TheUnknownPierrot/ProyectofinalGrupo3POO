@@ -1,3 +1,10 @@
+<%-- 
+    Document   : clientes
+    Created on : May 21, 2026, 10:28:35 AM
+    Author     : lalon
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>

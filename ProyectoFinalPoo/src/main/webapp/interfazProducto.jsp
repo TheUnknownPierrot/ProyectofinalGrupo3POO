@@ -1,3 +1,10 @@
+<%-- 
+    Document   : interfazProducto
+    Created on : May 21, 2026, 10:32:47 AM
+    Author     : lalon
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
