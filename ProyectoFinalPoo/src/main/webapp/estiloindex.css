@@ -1,195 +1,106 @@
-/* styles.css - Paleta de colores basada en la imagen del reporte */
-/* Título centrado, sin sección de fecha */
-
-* {
+html, body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  font-family: Arial, sans-serif;
 }
 
 body {
-  font-family: system-ui, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
-  background: #eef2f0;  /* fondo suave, inspirado en el tono neutro de la imagen */
-  min-height: 100vh;
+  /* Propiedades para que la imagen se adapte a toda la pantalla sin repetirse */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 1.5rem;
+  flex-direction: column;
+  overflow: hidden; /* Evita que la pantalla entera tenga barras de desplazamiento raras */
 }
 
-/* Contenedor principal: estilo "papel" blanco con sombras elegantes */
-.menu-container {
-  max-width: 1300px;
-  width: 100%;
-  background: #ffffff;
-  border-radius: 2rem;
-  box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
+/* ==========================================
+   Barra de Navegación Superior TOTALMENTE FIJA
+   ========================================== */
+.navbar-custom {
+  background-color: #273C56 !important; /* Tu azul marino oscuro */
+  padding: 12px 20px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  
+  /* ESTO FIJA LA BARRA ARRIBA */
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  z-index: 2000 !important; /* Se asegura de quedar por encima de cualquier otro elemento */
+  
+  border-bottom: 4px solid #FBC02D; /* Tu línea amarilla de detalle */
+}
+
+.navbar-custom .nav-link {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 1rem;
+  padding: 8px 16px !important;
   transition: all 0.2s ease;
 }
 
-/* Encabezado principal centrado */
-.main-header {
-  padding: 2rem 2rem 1rem 2rem;
-  background: linear-gradient(to right, #fafaf7, #ffffff);
-  border-bottom: 1px solid #e2e6e3;
-  text-align: center;
+.navbar-custom .nav-link:hover {
+  color: #FBC02D !important; /* Amarillo en hover */
 }
 
-.main-title {
-  font-size: 2.6rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: #2c3e2f;  /* verde oscuro profundo, inspirado en herramientas y ferretería */
-  display: inline-block;
-  position: relative;
-  margin: 0;
+.navbar-custom .nav-link.active {
+  color: #ffffff !important;
+  background-color: rgba(0, 0, 0, 0.2) !important; /* Botón de Inicio resaltado */
+  border-radius: 6px;
 }
 
-.header-underline {
-  width: 80px;
-  height: 4px;
-  background: #b87333;  /* cobre / herrumbre sutil */
-  border-radius: 4px;
-  margin: 0.8rem auto 0 auto;
-}
-
-/* Cuadrícula de 4 cuadros (cards) */
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.8rem;
-  padding: 2.5rem 2rem 2rem 2rem;
-}
-
-/* Cada cuadro / card - estilo rectangular con bordes suaves */
-.menu-card {
-  background: #ffffff;
-  border-radius: 1.5rem;
-  padding: 1.8rem 1.2rem 1.5rem 1.2rem;
-  text-decoration: none;
-  color: inherit;
+/* ==========================================
+   Contenedor y Tarjeta Flotante Centrada
+   ========================================== */
+.welcome-wrapper {
+  flex: 1;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  transition: all 0.25s ease;
-  border: 1px solid #e9ece5;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02);
-}
-
-.menu-card:hover {
-  transform: translateY(-6px);
-  border-color: #cbd5c0;
-  box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.12);
-  background: #fefefb;
-}
-
-/* Ícono grande */
-.card-icon {
-  font-size: 3.2rem;
-  margin-bottom: 1rem;
-  background: #f3f6f0;
-  width: 80px;
-  height: 80px;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  border-radius: 60px;
-  transition: all 0.2s;
-  color: #b87333;
+  align-items: center;
+  padding: 20px;
+  margin-top: 70px; /* Espacio exacto para que la barra fija no tape la tarjeta */
 }
 
-.menu-card:hover .card-icon {
-  background: #e8ede2;
-  transform: scale(1.02);
-}
-
-.card-title {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-bottom: 0.6rem;
-  color: #2c3e2f;
-  letter-spacing: -0.2px;
-}
-
-.card-description {
-  font-size: 0.9rem;
-  color: #6f7c6b;
-  margin-bottom: 1.2rem;
-  line-height: 1.4;
-  font-weight: 500;
-}
-
-.card-action {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #b87333;
-  background: #fef3e8;
-  padding: 0.4rem 1rem;
-  border-radius: 40px;
-  transition: all 0.2s;
-  display: inline-block;
-  margin-top: 0.2rem;
-}
-
-.menu-card:hover .card-action {
-  background: #b87333;
-  color: white;
-}
-
-/* Leve diferenciación para logout */
-.logout-card .card-icon {
-  color: #9e7e64;
-}
-
-.logout-card:hover .card-icon {
-  background: #f7ede5;
-}
-
-/* Pie de nota */
-.footer-note {
-  background: #f8f9f6;
-  border-top: 1px solid #e6e2d6;
-  padding: 1rem 2rem;
+.welcome-card-box {
+  /* Blanco con un toque de transparencia para que se note tu fondo detrás */
+  background-color: rgba(255, 255, 255, 0.88) !important;
+  
+  /* Efecto moderno de desenfoque estilo cristal */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  
+  border-radius: 12px;
+  padding: 50px 40px;
+  max-width: 700px;
+  width: 90%;
   text-align: center;
-  font-size: 0.75rem;
-  color: #8f9a8b;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 2px solid #FBC02D; /* Tu borde amarillo */
+}
+
+.saludo-title {
+  color: #273C56; /* Título en azul oscuro */
+  font-size: 3.5rem; 
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.welcome-subtitle p {
+  font-size: 1.5rem;
+  color: #273C56; 
   font-weight: 500;
-  letter-spacing: 0.3px;
+  margin-bottom: 0;
 }
 
-/* Ajustes responsivos */
-@media (max-width: 680px) {
-  body {
-    padding: 1rem;
-  }
-  .main-title {
-    font-size: 2rem;
-  }
-  .cards-grid {
-    gap: 1rem;
-    padding: 1.8rem 1rem 1.5rem 1rem;
-  }
-  .menu-card {
-    padding: 1.2rem 0.8rem;
-  }
-  .card-title {
-    font-size: 1.5rem;
-  }
-  .footer-note {
-    padding: 0.8rem 1rem;
-  }
-}
-
-/* Pantallas muy pequeñas */
-@media (max-width: 480px) {
-  .card-icon {
-    width: 65px;
-    height: 65px;
-    font-size: 2.5rem;
-  }
-  .card-description {
-    font-size: 0.8rem;
-  }
+.welcome-footer p {
+  font-size: 0.9rem;
+  color: #475569;
+  margin-top: 35px;
+  margin-bottom: 0;
 }

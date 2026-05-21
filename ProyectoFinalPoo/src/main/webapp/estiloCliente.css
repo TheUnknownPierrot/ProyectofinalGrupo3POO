@@ -1,46 +1,52 @@
-body{
-    background-color: #f6f1e7; /* Fondo beige claro */
+/* ==========================================
+   Configuración General del Cuerpo
+   ========================================== */
+body {
+    background-color: #FEFBEA; /* Cambiado a tu crema oficial para unificar todo el sistema */
     font-family: Arial, Helvetica, sans-serif;
     color: #3b3b3b;
+    
+    /* ESPACIO OBLIGATORIO PARA QUE LA BARRA FIJA NO TAPE EL FORMULARIO */
+    padding-top: 90px !important; 
 }
 
-/* ENCABEZADO */
-.header{
+/* ENCABEZADO (Mantenido por si usas la clase en subsecciones) */
+.header {
     background: linear-gradient(135deg, #d4aa2a, #f0c84b);
     color: white;
     padding: 35px;
     box-shadow: 0px 2px 10px rgba(0,0,0,0.15);
 }
 
-.header h1{
+.header h1 {
     font-size: 40px;
     font-weight: bold;
     margin-bottom: 5px;
 }
 
 /* TARJETA */
-.card{
+.card {
     border-radius: 18px;
-    border: 2px solid #d8b13c;
-    background-color: #fffdf8;
+    border: 2px solid #FBC02D; /* Sintonizado con el amarillo de la barra */
+    background-color: #ffffff;
     box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
     transition: 0.3s;
 }
 
-.card:hover{
+.card:hover {
     transform: translateY(-5px);
     box-shadow: 0px 6px 18px rgba(0,0,0,0.15);
 }
 
 /* TITULOS */
-h3{
-    color: #2d2d2d;
+h3 {
+    color: #273C56; /* Cambiado a tu azul marino de la barra para mejor contraste */
     font-weight: bold;
     letter-spacing: 1px;
 }
 
 /* INPUTS */
-.form-control{
+.form-control {
     border-radius: 10px;
     border: 1px solid #d4aa2a;
     padding: 10px;
@@ -48,15 +54,15 @@ h3{
     background-color: #fffdf7;
 }
 
-.form-control:focus{
+.form-control:focus {
     box-shadow: 0px 0px 8px rgba(212, 170, 42, 0.5);
     border-color: #d4aa2a;
     background-color: white;
 }
 
 /* BOTONES */
-.btn-guardar{
-    background-color: #2f3b4c; /* Azul oscuro de botones */
+.btn-guardar {
+    background-color: #273C56; /* Forzado a tu azul marino oscuro exacto */
     color: white;
     padding: 10px 25px;
     border-radius: 10px;
@@ -66,61 +72,61 @@ h3{
     transition: 0.3s;
 }
 
-.btn-guardar:hover{
-    background-color: #1f2a38;
+.btn-guardar:hover {
+    background-color: #1a293b;
     transform: scale(1.05);
     color: white;
 }
 
-.btn-limpiar{
+.btn-limpiar {
     background-color: #ffffff;
-    border: 2px solid #d4aa2a;
-    color: #d4aa2a;
+    border: 2px solid #FBC02D; /* Tu amarillo oro */
+    color: #273C56; /* Texto azul marino oscuro */
     padding: 10px 25px;
     border-radius: 10px;
     font-weight: bold;
     transition: 0.3s;
 }
 
-.btn-limpiar:hover{
-    background-color: #d4aa2a;
-    color: white;
+.btn-limpiar:hover {
+    background-color: #FBC02D;
+    color: #273C56;
     transform: scale(1.05);
 }
 
 /* TABLA */
-.tabla-clientes{
-    background-color: #fffdf8;
+.tabla-clientes {
+    background-color: #ffffff;
     padding: 25px;
     border-radius: 18px;
     box-shadow: 0px 4px 15px rgba(0,0,0,0.08);
 }
 
 /* ENCABEZADO TABLA */
-table thead{
-    background-color: #d4aa2a;
+table thead {
+    background-color: #273C56; /* Cabecera azul marino para que haga juego con la Navbar */
     color: white;
 }
 
 /* FILAS */
-table tbody tr:hover{
+table tbody tr:hover {
     background-color: #fdf3cf;
     transition: 0.3s;
 }
 
 /* BORDES TABLA */
-.table{
+.table {
     border-radius: 10px;
     overflow: hidden;
 }
 
 /* BOTONES GENERALES */
-button{
+button {
     transition: 0.3s;
 }
 
 /* BUSCADOR */
-.search-box{
+.search-box {
     background-color: white;
     border: 2px solid #d4aa2a;
     border-radius: 12px;
@@ -128,13 +134,13 @@ button{
 }
 
 /* PRODUCTOS */
-.producto-precio{
+.producto-precio {
     color: #d48700;
     font-weight: bold;
     font-size: 18px;
 }
 
-.producto-nombre{
+.producto-nombre {
     color: #2d2d2d;
     font-weight: bold;
 }

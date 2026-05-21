@@ -8,58 +8,87 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Ferretería - Menú Principal</title>
-  <link rel="stylesheet" href="estiloindex.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferretería - Inicio</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+   <style>
+        body {
+            background-image: url('ImagenDeInicio/Ferreteria.png') !important;
+        }
+        <%@include file="estiloindex.css"%>
+    </style>
 </head>
 <body>
-  <div class="menu-container">
-    <!-- Encabezado principal centrado -->
-    <div class="main-header">
-      <h1 class="main-title">Menú principal</h1>
-      <div class="header-underline"></div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container-fluid">
+            <div class="dropdown me-3">
+                <a class="btn btn-link nav-link dropdown-toggle text-white text-decoration-none" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    alan.aguirre
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item text-danger" href="login.jsp">Cerrar Sesión 🚪</a></li>
+                </ul>
+            </div>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active fw-bold" href="index.jsp">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="interfazProducto.jsp">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="clientes.jsp">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reportes.jsp">Reportes</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="welcome-wrapper">
+        <div class="welcome-card-box">
+            
+            <h1 id="saludo" class="saludo-title"></h1>
+            
+            <div class="welcome-subtitle">
+                <p>Bienvenido al Sistema de la Ferretería</p> 
+            </div>
+            
+            
+        </div>
     </div>
 
-    <!-- Cuadrícula de 4 acciones principales -->
-    <div class="cards-grid">
-      <!-- Productos -> redirige a InterfazProducto.jsp -->
-      <a href="interfazProducto.jsp" class="menu-card">
-        <div class="card-icon">🔧</div>
-        <h2 class="card-title">Productos</h2>
-        <p class="card-description">Gestiona inventario, precios y existencias</p>
-        <span class="card-action">Acceder →</span>
-      </a>
+    <script>
+        function obtenerSaludo() {
+            const hora = new Date().getHours();
+            let saludo = "";
 
-      <!-- Clientes (redirección a clientes.jsp) -->
-      <a href="clientes.jsp" class="menu-card">
-        <div class="card-icon">👥</div>
-        <h2 class="card-title">Clientes</h2>
-        <p class="card-description">Administra tus clientes y contactos</p>
-        <span class="card-action">Acceder →</span>
-      </a>
+            if (hora >= 6 && hora < 12) {
+                saludo = "Buenos días";
+            } else if (hora >= 12 && hora < 18) {
+                saludo = "Buenas tardes";
+            } else {
+                saludo = "Buenas noches";
+            }
 
-      <!-- Reportes -> redirige a Reportes.jsp -->
-      <a href="reportes.jsp" class="menu-card">
-        <div class="card-icon">📊</div>
-        <h2 class="card-title">Reportes</h2>
-        <p class="card-description">Visualiza ventas y reportes del día</p>
-        <span class="card-action">Acceder →</span>
-      </a>
+            return saludo;
+        }
 
-      <!-- Log Out (redirección a login.jsp) -->
-      <a href="login.jsp" class="menu-card logout-card">
-        <div class="card-icon">🚪</div>
-        <h2 class="card-title">Log Out</h2>
-        <p class="card-description">Cerrar sesión actual</p>
-        <span class="card-action">Salir →</span>
-      </a>
-    </div>
+        document.getElementById("saludo").innerText = obtenerSaludo();
+    </script>
 
-    <!-- Pie opcional -->
-    <div class="footer-note">
-      <p>Sistema Ferretero • Selecciona una opción para continuar</p>
-    </div>
-  </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

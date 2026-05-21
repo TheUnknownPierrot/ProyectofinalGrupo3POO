@@ -6,26 +6,28 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
--->
-
-<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ferretería El Tornillo Dorado - Catálogo</title>
-    <!-- CSS -->
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
     <link rel="stylesheet" href="StyleInterfazProducto.css">
 </head>
 <body>
 
-    <!-- Capa de fondo para el modal -->
+    <%@include file="barraDeInicio.jsp"%>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
+<body>
+
+    <%@include file="barraDeInicio.jsp"%>
+
     <div id="overlay"></div>
 
-    <!-- Buscador -->
     <div class="buscador-contenedor" id="contenedor-buscador">
         <div class="btn-lupa" id="btn-abrir-busqueda">
             <svg class="lupa-icon" viewBox="0 0 24 24">
@@ -35,17 +37,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <input type="text" id="input-busqueda" placeholder="Buscar herramienta...">
     </div>
 
-
     <div class="carrito-flotante" id="btn-carrito">
         🛒 Artículos: <span id="contador">0</span> (Ver total)
     </div>
 
-
     <div id="ventana-carrito">
         <h2 class="titulo-modal">Lista de Materiales</h2>
         <div id="lista-carrito">
-            <!-- Los productos agregados se inyectarán aquí con Java -->
-        </div>
+            </div>
         <h3 class="total-texto">Total a pagar: $<span id="total-precio">0.00</span></h3>
         <button id="btn-pagar" class="btn-pago" style="display:none;">💳 COMPRAR AHORA</button>
         <button id="btn-vaciar" class="btn-secundario">🗑️ Vaciar Carrito</button>
@@ -55,7 +54,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <h1> Productos </h1>
 
     <div class="caja-de-productos" id="catalogo">
-        <!-- 1-10: Herramientas Manuales -->
         <div class="producto">
             <img src="ImagenesProducto/Alicate.png" alt=""/>
             <h3>Alicate</h3>
@@ -117,7 +115,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <button class="btn-agregar">Agregar al Carrito</button>
         </div>
 
-        <!-- 11-20: Pinturas y Acabados -->
         <div class="producto">
             <img src="ImagenesProducto/Pintura blanca.png" alt="Pintura blanca" onerror="this.src='https://via.placeholder.com/150?text=Blanco'">
             <h3>Pintura blanca</h3>
@@ -179,7 +176,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <button class="btn-agregar">Agregar al Carrito</button>
         </div>
 
-        <!-- 21-30: Electricidad -->
         <div class="producto">
             <img src="ImagenesProducto/Cable1.png" alt="Cable #12" onerror="this.src='https://via.placeholder.com/150?text=Cable12'">
             <h3>Cable #12</h3>
@@ -241,7 +237,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <button class="btn-agregar">Agregar al Carrito</button>
         </div>
 
-        <!-- 31-40: Plomería -->
         <div class="producto">
             <img src="ImagenesProducto/Tubo PVC.png" alt="Tubo PVC" onerror="this.src='https://via.placeholder.com/150?text=PVC'">
             <h3>Tubo PVC</h3>
@@ -303,7 +298,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <button class="btn-agregar">Agregar al Carrito</button>
         </div>
 
-        <!-- 41-50: Construcción -->
         <div class="producto">
             <img src="ImagenesProducto/Cemento.png" alt="Cemento" onerror="this.src='https://via.placeholder.com/150?text=Cemento'">
             <h3>Cemento</h3>

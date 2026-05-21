@@ -8,26 +8,20 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!--
-    Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-    Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
-    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reportes - Panel de Ventas</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
     <link rel="stylesheet" href="estiloReportes.css">
 </head>
 <body>
 
-<div class="app-container">
-    <!-- FRANJA AMARILLA: Título principal "Reportes" -->
-    <header class="report-header">
-        <h1>Reportes</h1>
-    </header>
+    <%@include file="barraDeInicio.jsp"%>
 
-    <!-- Contenido principal: dos columnas -->
+<div class="app-container">
     <div class="dashboard">
-        <!-- COLUMNA IZQUIERDA: Calendario + buscador por fecha -->
         <aside class="calendar-section">
             <div class="card">
                 <h2 class="section-title">Buscar reportes por fecha</h2>
@@ -35,7 +29,6 @@
                     <label for="fechaReporte">Selecciona una fecha:</label>
                     <input type="date" id="fechaReporte" class="date-input" value="2026-05-08">
                 </div>
-                <!-- Enlace que abre el popup (sin JavaScript) -->
                 <a href="#reporteModal" class="btn-search">Buscar reporte</a>
                 <div class="cal-note">
                     * Selecciona una fecha y presiona "Buscar reporte"<br>
@@ -45,7 +38,6 @@
             </div>
         </aside>
 
-        <!-- COLUMNA DERECHA: Reportes del día -->
         <main class="sales-section">
             <div class="card sales-card">
                 <h2 class="section-title">Reportes del día</h2>
@@ -55,7 +47,6 @@
                 </div>
                 
                 <div class="ventas-lista">
-                    <!-- Producto 1 -->
                     <div class="producto-item">
                         <div class="producto-info">
                             <span class="prod-nombre">Alicate</span>
@@ -67,7 +58,6 @@
                         </div>
                     </div>
 
-                    <!-- Producto 2 -->
                     <div class="producto-item">
                         <div class="producto-info">
                             <span class="prod-nombre">Martillo de Carpintero</span>
@@ -79,7 +69,6 @@
                         </div>
                     </div>
 
-                    <!-- Producto 3 -->
                     <div class="producto-item">
                         <div class="producto-info">
                             <span class="prod-nombre">Destornillador plano</span>
@@ -91,7 +80,6 @@
                         </div>
                     </div>
 
-                    <!-- Producto 4 -->
                     <div class="producto-item">
                         <div class="producto-info">
                             <span class="prod-nombre">Destornillador estrella</span>
@@ -103,7 +91,6 @@
                         </div>
                     </div>
 
-                    <!-- Producto 5 -->
                     <div class="producto-item">
                         <div class="producto-info">
                             <span class="prod-nombre">Taladro</span>
@@ -115,7 +102,6 @@
                         </div>
                     </div>
 
-                    <!-- Producto 6 -->
                     <div class="producto-item">
                         <div class="producto-info">
                             <span class="prod-nombre">Sierra manual</span>
@@ -127,7 +113,6 @@
                         </div>
                     </div>
 
-                    <!-- Producto 7 -->
                     <div class="producto-item">
                         <div class="producto-info">
                             <span class="prod-nombre">Llave inglesa</span>
@@ -139,7 +124,6 @@
                         </div>
                     </div>
 
-                    <!-- Producto 8 -->
                     <div class="producto-item">
                         <div class="producto-info">
                             <span class="prod-nombre">Cinta métrica</span>
@@ -151,7 +135,6 @@
                         </div>
                     </div>
 
-                    <!-- Producto 9 -->
                     <div class="producto-item">
                         <div class="producto-info">
                             <span class="prod-nombre">Nivel</span>
@@ -163,7 +146,6 @@
                         </div>
                     </div>
 
-                    <!-- Producto 10 -->
                     <div class="producto-item">
                         <div class="producto-info">
                             <span class="prod-nombre">Caja de herramientas</span>
@@ -175,7 +157,6 @@
                         </div>
                     </div>
 
-                    <!-- Producto 11 -->
                     <div class="producto-item">
                         <div class="producto-info">
                             <span class="prod-nombre">Pintura blanca</span>
@@ -187,7 +168,6 @@
                         </div>
                     </div>
 
-                    <!-- Producto 12 -->
                     <div class="producto-item">
                         <div class="producto-info">
                             <span class="prod-nombre">Pintura azul</span>
@@ -213,7 +193,6 @@
     </div>
 </div>
 
-<!-- VENTANA MODAL (POPUP) - se abre al hacer clic en "Buscar reporte" -->
 <div id="reporteModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
@@ -351,5 +330,6 @@
     </div>
 </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

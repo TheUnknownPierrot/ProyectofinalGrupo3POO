@@ -2,10 +2,10 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
 */
-/* 
-    Created on : May 8, 2026, 12:21:37 PM
+/* Created on : May 8, 2026, 12:21:37 PM
     Author     : lalon
 */
+
 /* Reset y estilos base */
 * {
     margin: 0;
@@ -14,37 +14,22 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 
 body {
-    background: #f0f4f8;
+    /* Fondo crema claro oficial de la ferretería */
+    background-color: #FEFBEA !important;
     font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    padding: 2rem 1.5rem;
     color: #1e293b;
+    
+    /* ESPACIO EXTRA IMPRESCINDIBLE PARA LA BARRA FIJA SUPERIOR */
+    padding-top: 90px !important;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-bottom: 2rem;
 }
 
 .app-container {
     max-width: 1400px;
     margin: 0 auto;
     width: 100%;
-}
-
-/* FRANJA AMARILLA */
-.report-header {
-    background: #fbbf24;
-    border-radius: 28px;
-    padding: 1.2rem 2rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
-    text-align: center;
-}
-
-.report-header h1 {
-    font-size: 2.2rem;
-    font-weight: 700;
-    letter-spacing: -0.3px;
-    color: #0f172a;
-    margin: 0;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
 }
 
 /* Layout dos columnas */
@@ -64,13 +49,14 @@ body {
     min-width: 350px;
 }
 
-/* Tarjetas */
+/* Tarjetas limpias con bordes amarillo oro */
 .card {
     background: #ffffff;
-    border-radius: 32px;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
     padding: 1.8rem 2rem;
     height: 100%;
+    border: 2px solid #FBC02D; /* Sintonizado con tus productos y clientes */
 }
 
 .section-title {
@@ -78,9 +64,9 @@ body {
     font-weight: 600;
     margin-bottom: 1.4rem;
     padding-bottom: 0.5rem;
-    border-bottom: 3px solid #fbbf24;
+    border-bottom: 3px solid #FBC02D;
     display: inline-block;
-    color: #0f172a;
+    color: #273C56; /* Azul marino de tu barra */
 }
 
 /* Calendario */
@@ -110,13 +96,13 @@ body {
 
 .date-input:focus {
     outline: none;
-    border-color: #fbbf24;
-    box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.2);
+    border-color: #FBC02D;
+    box-shadow: 0 0 0 3px rgba(251, 192, 45, 0.2);
 }
 
-/* Botón de búsqueda convertido en enlace */
+/* Botón de búsqueda (Enlace adaptado al azul marino oficial) */
 .btn-search {
-    background: #1e293b;
+    background: #273C56; /* Combinación estricta con barra de inicio */
     color: white;
     border: none;
     padding: 12px 20px;
@@ -136,9 +122,10 @@ body {
 }
 
 .btn-search:hover {
-    background: #0f172a;
+    background: #1a293b;
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    color: white;
 }
 
 .cal-note {
@@ -147,8 +134,9 @@ body {
     color: #5b6e8c;
     text-align: center;
     background: #f8fafc;
-    padding: 8px;
-    border-radius: 30px;
+    padding: 10px;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
 }
 
 /* Reportes del día */
@@ -161,7 +149,7 @@ body {
     border-radius: 40px;
     margin-bottom: 1.5rem;
     color: #b45309;
-    border-left: 4px solid #fbbf24;
+    border-left: 4px solid #FBC02D;
 }
 
 .ventas-lista {
@@ -181,14 +169,14 @@ body {
 }
 
 .ventas-lista::-webkit-scrollbar-thumb {
-    background: #fbbf24;
+    background: #FBC02D;
     border-radius: 10px;
 }
 
 /* Producto individual */
 .producto-item {
     background: #f9f9fc;
-    border-radius: 20px;
+    border-radius: 16px;
     padding: 0.9rem 1rem;
     margin-bottom: 0.75rem;
     display: flex;
@@ -230,8 +218,8 @@ body {
 }
 
 .prod-cantidad {
-    background: #fbbf24;
-    color: #1e293b;
+    background: #FBC02D; /* Amarillo de tu paleta */
+    color: #273C56; /* Texto azul marino oscuro */
     font-weight: 800;
     padding: 6px 14px;
     border-radius: 50px;
@@ -249,15 +237,17 @@ body {
     font-size: 0.9rem;
 }
 
+/* Caja de Totalizador del Día */
 .total-ventas {
-    background: #1e293b;
-    color: #fbbf24;
+    background: #273C56; /* Unificado con el color del menú */
+    color: #FBC02D; /* Letras oro brillantes */
     padding: 1rem 1.2rem;
     border-radius: 40px;
     font-weight: 800;
     font-size: 1.4rem;
     text-align: center;
     margin-top: 1rem;
+    box-shadow: 0 4px 12px rgba(39, 60, 86, 0.2);
 }
 
 .note-simulacion {
@@ -270,20 +260,19 @@ body {
     color: #3b4e6e;
 }
 
-/* ========== MODAL / POPUP (sin JavaScript, usa :target) ========== */
+/* ========== MODAL / POPUP SIN JAVASCRIPT ========== */
 .modal {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 3000; /* Por encima de la barra fija */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(4px);
 }
 
-/* Mostrar el modal cuando está como target (al hacer clic en #reporteModal) */
 .modal:target {
     display: block;
     animation: fadeIn 0.2s ease;
@@ -296,20 +285,21 @@ body {
 
 .modal-content {
     background-color: #ffffff;
-    margin: 3% auto;
+    margin: 5% auto;
     width: 90%;
     max-width: 700px;
-    border-radius: 32px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
     animation: slideUp 0.3s ease;
-    max-height: 90vh;
+    max-height: 85vh;
     display: flex;
     flex-direction: column;
+    border: 2px solid #FBC02D;
 }
 
 @keyframes slideUp {
     from {
-        transform: translateY(50px);
+        transform: translateY(40px);
         opacity: 0;
     }
     to {
@@ -323,15 +313,15 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 2rem;
-    border-bottom: 3px solid #fbbf24;
+    border-bottom: 3px solid #FBC02D;
     background: #fef9e6;
-    border-radius: 32px 32px 0 0;
+    border-radius: 22px 22px 0 0;
 }
 
 .modal-header h2 {
     font-size: 1.6rem;
     font-weight: 700;
-    color: #0f172a;
+    color: #273C56;
     margin: 0;
 }
 
@@ -365,12 +355,12 @@ body {
     border-radius: 40px;
     margin-bottom: 1.5rem;
     color: #b45309;
-    border-left: 4px solid #fbbf24;
+    border-left: 4px solid #FBC02D;
 }
 
 .modal-lista-productos {
     margin-bottom: 1.5rem;
-    max-height: 450px;
+    max-height: 400px;
     overflow-y: auto;
     padding-right: 8px;
 }
@@ -385,13 +375,13 @@ body {
 }
 
 .modal-lista-productos::-webkit-scrollbar-thumb {
-    background: #fbbf24;
+    background: #FBC02D;
     border-radius: 10px;
 }
 
 .modal-producto-item {
     background: #f9f9fc;
-    border-radius: 20px;
+    border-radius: 16px;
     padding: 0.9rem 1rem;
     margin-bottom: 0.75rem;
     display: flex;
@@ -426,8 +416,8 @@ body {
 }
 
 .modal-prod-cantidad {
-    background: #fbbf24;
-    color: #1e293b;
+    background: #FBC02D;
+    color: #273C56;
     font-weight: 800;
     padding: 5px 12px;
     border-radius: 50px;
@@ -446,8 +436,8 @@ body {
 }
 
 .modal-total {
-    background: #1e293b;
-    color: #fbbf24;
+    background: #273C56;
+    color: #FBC02D;
     padding: 1rem 1.2rem;
     border-radius: 40px;
     font-weight: 800;
@@ -460,14 +450,11 @@ body {
 @media (max-width: 780px) {
     body {
         padding: 1rem;
+        padding-top: 85px !important;
     }
     
     .dashboard {
         flex-direction: column;
-    }
-    
-    .report-header h1 {
-        font-size: 1.8rem;
     }
     
     .section-title {
@@ -480,7 +467,7 @@ body {
     
     .modal-content {
         width: 95%;
-        margin: 10% auto;
+        margin: 15% auto;
     }
     
     .modal-header h2 {
