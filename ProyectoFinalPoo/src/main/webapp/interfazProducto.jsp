@@ -1,30 +1,45 @@
-<%-- 
-    Document   : interfazProducto
-    Created on : May 21, 2026, 10:32:47 AM
-    Author     : lalon
---%>
-
+<%-- Importamos las herramientas de Java (El manual de instrucciones) --%>
+<%@page import="java.util.List"%>
+<%@page import="modelos.Producto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ferretería El Tornillo Dorado - Catálogo</title>
+    <title>Ferretería - Catálogo</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    
     <link href="css/StyleInterfazProducto.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
     <%@include file="barraDeInicio.jsp"%>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
-</html>
-<body>
 
-    <%@include file="barraDeInicio.jsp"%>
+    <%
+        List<Producto> miCarrito = (List<Producto>) session.getAttribute("carritoCompras");
+        int cantidadItems = 0;
+        double totalPagar = 0.0;
+        
+        if (miCarrito != null) {
+            cantidadItems = miCarrito.size();
+            for (Producto item : miCarrito) {
+                totalPagar += item.getPrecio();
+            }
+        }
+        
+        // Verificamos si se acaba de registrar una compra para lanzar la confirmación
+        String compraExitosa = (String) session.getAttribute("compraExitosa");
+        if (compraExitosa != null && compraExitosa.equals("true")) {
+            session.removeAttribute("compraExitosa"); // Limpiamos la bandera de inmediato
+    %>
+            <script>
+                alert("¡Compra realizada con éxito!\nLos registros han sido procesados en la base de datos.");
+            </script>
+    <%
+        }
+    %>
 
     <div id="overlay"></div>
 
@@ -37,328 +52,99 @@
         <input type="text" id="input-busqueda" placeholder="Buscar herramienta...">
     </div>
 
-    <div class="carrito-flotante" id="btn-carrito">
-        🛒 Artículos: <span id="contador">0</span> (Ver total)
+    <%-- El botón del carrito muestra los totales calculados directamente por Java --%>
+    <div id="btn-carrito" style="position: fixed; top: 80px; right: 20px; background-color: #ffc107; color: #000; padding: 10px 20px; border-radius: 30px; font-weight: bold; cursor: pointer; z-index: 9999; box-shadow: 0px 4px 6px rgba(0,0,0,0.3);">
+        🛒 Artículos: <span id="contador"><%= cantidadItems %></span> Ver total
     </div>
 
     <div id="ventana-carrito">
         <h2 class="titulo-modal">Lista de Materiales</h2>
+        
         <div id="lista-carrito">
-            </div>
-        <h3 class="total-texto">Total a pagar: $<span id="total-precio">0.00</span></h3>
-        <button id="btn-pagar" class="btn-pago" style="display:none;">💳 COMPRAR AHORA</button>
-        <button id="btn-vaciar" class="btn-secundario">🗑️ Vaciar Carrito</button>
-        <button id="btn-cerrar-modal" class="btn-secundario">Cerrar Ventana</button>
+            <%-- Estructura de repetición Java para listar los artículos agregados --%>
+            <% 
+                if (miCarrito != null && !miCarrito.isEmpty()) { 
+                    for (Producto item : miCarrito) { 
+            %>
+                        <p style="margin: 5px 0; border-bottom: 1px solid #ccc; text-align: left; padding-left: 10px;">
+                            🛠️ <%= item.getNombre() %> - $<%= String.format("%.2f", item.getPrecio()) %>
+                        </p>
+            <%      
+                    }
+                } else { 
+            %>
+                    <p style="text-align: center; color: #777;">El carrito está vacío.</p>
+            <% 
+                } 
+            %>
+        </div>
+        
+        <h3 class="total-texto">Total a pagar: $<span id="total-precio"><%= String.format("%.2f", totalPagar) %></span></h3>
+        
+        <% if (cantidadItems > 0) { %>
+            <form action="ControladorProducto" method="POST" style="margin: 0; padding: 0;">
+                <input type="hidden" name="accion" value="comprar">
+                <button type="submit" id="btn-pagar" class="btn-pago" style="display: block; width: 100%;">💳 COMPRAR AHORA</button>
+            </form>
+            
+            <form action="ControladorProducto" method="POST" style="margin: 0; padding: 0; margin-top: 5px;">
+                <input type="hidden" name="accion" value="vaciarCarrito">
+                <button type="submit" id="btn-vaciar" class="btn-secundario" style="display: block; width: 100%;">🗑️ Vaciar Carrito</button>
+            </form>
+        <% } %>
+        
+        <button id="btn-cerrar-modal" class="btn-secundario" style="margin-top: 5px; width: 100%;">Cerrar Ventana</button>
     </div>
 
     <h1> Productos </h1>
 
     <div class="caja-de-productos" id="catalogo">
+        
+        <%
+            List<Producto> lista = (List<Producto>) request.getAttribute("listaProductos");
+            if (lista != null && !lista.isEmpty()) {
+                for (Producto p : lista) {
+        %>
+        
         <div class="producto">
-            <img src="ImagenesProducto/Alicate.png" alt=""/>
-            <h3>Alicate</h3>
-            <p>$8.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
+            <img src="ImagenesProducto/<%= p.getImagen() %>" alt="<%= p.getNombre() %>" onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=Sin+Imagen';">
+            <h3><%= p.getNombre() %></h3>
+            <p>$<%= String.format("%.2f", p.getPrecio()) %></p>
+            
+            <form action="ControladorProducto" method="POST" style="margin: 0; padding: 0;">
+                <input type="hidden" name="accion" value="agregarCarrito">
+                <input type="hidden" name="id" value="<%= p.getId() %>">
+                <input type="hidden" name="nombre" value="<%= p.getNombre() %>">
+                <input type="hidden" name="precio" value="<%= p.getPrecio() %>">
+                <button type="submit" class="btn-agregar" style="width: 100%;">Agregar al Carrito</button>
+            </form>
         </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Martillo.png" alt=""/>
-            <h3>Martillo de Carpintero</h3>
-            <p>$10.50</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Destornillador plano.png" alt="Destornillador plano" onerror="this.src='https://via.placeholder.com/150?text=Plano'">
-            <h3>Destornillador plano</h3>
-            <p>$5.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Destornillador estrella.png" alt="Destornillador estrella" onerror="this.src='https://via.placeholder.com/150?text=Estrella'">
-            <h3>Destornillador estrella</h3>
-            <p>$5.50</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Taladro.png" alt="Taladro" onerror="this.src='https://via.placeholder.com/150?text=Taladro'">
-            <h3>Taladro</h3>
-            <p>$75.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Sierra manual.png" alt="Sierra manual" onerror="this.src='https://via.placeholder.com/150?text=Sierra'">
-            <h3>Sierra manual</h3>
-            <p>$15.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Llave inglesa.png" alt="Llave inglesa" onerror="this.src='https://via.placeholder.com/150?text=Llave'">
-            <h3>Llave inglesa</h3>
-            <p>$12.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Cinta metrica.png" alt="Cinta metrica" onerror="this.src='https://via.placeholder.com/150?text=Cinta'">
-            <h3>Cinta metrica</h3>
-            <p>$4.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Nivel.png" alt="Nivel" onerror="this.src='https://via.placeholder.com/150?text=Nivel'">
-            <h3>Nivel</h3>
-            <p>$9.50</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Caja de herramientas.png" alt="Caja de herramientas" onerror="this.src='https://via.placeholder.com/150?text=Caja'">
-            <h3>Caja de herramientas</h3>
-            <p>$25.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-
-        <div class="producto">
-            <img src="ImagenesProducto/Pintura blanca.png" alt="Pintura blanca" onerror="this.src='https://via.placeholder.com/150?text=Blanco'">
-            <h3>Pintura blanca</h3>
-            <p>$22.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Pintura azul.png" alt="Pintura azul" onerror="this.src='https://via.placeholder.com/150?text=Azul'">
-            <h3>Pintura azul</h3>
-            <p>$22.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Pintura roja.png" alt="Pintura roja" onerror="this.src='https://via.placeholder.com/150?text=Rojo'">
-            <h3>Pintura Roja</h3>
-            <p>$21.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Pintura verde.png" alt="Pintura verde" onerror="this.src='https://via.placeholder.com/150?text=Verde'">
-            <h3>Pintura verde</h3>
-            <p>$23.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Rodillo.png" alt="Rodillo" onerror="this.src='https://via.placeholder.com/150?text=Rodillo'">
-            <h3>Rodillo</h3>
-            <p>$6.50</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Brocha.png" alt="Brocha" onerror="this.src='https://via.placeholder.com/150?text=Brocha'">
-            <h3>Brocha</h3>
-            <p>$3.50</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Diluyente.png" alt="Diluyente" onerror="this.src='https://via.placeholder.com/150?text=Diluyente'">
-            <h3>Diluyente</h3>
-            <p>$7.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Sellador.png" alt="Sellador" onerror="this.src='https://via.placeholder.com/150?text=Sellador'">
-            <h3>Sellador</h3>
-            <p>$15.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Barniz.png" alt="Barniz" onerror="this.src='https://via.placeholder.com/150?text=Barniz'">
-            <h3>Barniz</h3>
-            <p>$18.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Esmalte.png" alt="Esmalte" onerror="this.src='https://via.placeholder.com/150?text=Esmalte'">
-            <h3>Esmalte</h3>
-            <p>$19.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-
-        <div class="producto">
-            <img src="ImagenesProducto/Cable1.png" alt="Cable #12" onerror="this.src='https://via.placeholder.com/150?text=Cable12'">
-            <h3>Cable #12</h3>
-            <p>$5.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Cable2.png" alt="Cable #14" onerror="this.src='https://via.placeholder.com/150?text=Cable14'">
-            <h3>Cable #14</h3>
-            <p>$4.50</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Interruptor.png" alt="Interruptor" onerror="this.src='https://via.placeholder.com/150?text=Interruptor'">
-            <h3>Interruptor</h3>
-            <p>$4.50</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Tomacorriente.png" alt="Tomacorriente" onerror="this.src='https://via.placeholder.com/150?text=Toma'">
-            <h3>Tomacorriente</h3>
-            <p>$3.75</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Bonbillo LED.png" alt="Bombillo LED" onerror="this.src='https://via.placeholder.com/150?text=LED'">
-            <h3>Bombillo LED</h3>
-            <p>$2.50</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Extension.png" alt="Extension" onerror="this.src='https://via.placeholder.com/150?text=Extens'">
-            <h3>Extension</h3>
-            <p>$10.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Breaker.png" alt="Breaker" onerror="this.src='https://via.placeholder.com/150?text=Breaker'">
-            <h3>Breaker</h3>
-            <p>$12.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Porta lampara.png" alt="Porta lampara" onerror="this.src='https://via.placeholder.com/150?text=Porta'">
-            <h3>Porta lampara</h3>
-            <p>$2.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Cinta aislante.png" alt="Cinta aislante" onerror="this.src='https://via.placeholder.com/150?text=CintaAislante'">
-            <h3>Cinta aislante</h3>
-            <p>$1.50</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Panel electrico.png" alt="Panel electrico" onerror="this.src='https://via.placeholder.com/150?text=Panel'">
-            <h3>Panel electrico</h3>
-            <p>$50.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-
-        <div class="producto">
-            <img src="ImagenesProducto/Tubo PVC.png" alt="Tubo PVC" onerror="this.src='https://via.placeholder.com/150?text=PVC'">
-            <h3>Tubo PVC</h3>
-            <p>$8.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/llave de paso.png" alt="llave de paso" onerror="this.src='https://via.placeholder.com/150?text=LlavePaso'">
-            <h3>llave de paso</h3>
-            <p>$6.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Codo PVC.png" alt="Codo PVC" onerror="this.src='https://via.placeholder.com/150?text=Codo'">
-            <h3>Codo PVC</h3>
-            <p>$2.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Pegamente PVC.png" alt="Pegamento PVC" onerror="this.src='https://via.placeholder.com/150?text=Pegamento'">
-            <h3>Pegamento PVC</h3>
-            <p>$4.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Tee PVC.png" alt="Tee PVC" onerror="this.src='https://via.placeholder.com/150?text=Tee'">
-            <h3>Tee PVC</h3>
-            <p>$2.50</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Reduccion PVC.png" alt="Reduccion PVC" onerror="this.src='https://via.placeholder.com/150?text=Reduccion'">
-            <h3>Reduccion PVC</h3>
-            <p>$2.20</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Mangera.png" alt="Mangera" onerror="this.src='https://via.placeholder.com/150?text=Manguera'">
-            <h3>Manguera</h3>
-            <p>$12.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Llave de chorro.png" alt="Llave de chorro" onerror="this.src='https://via.placeholder.com/150?text=Chorro'">
-            <h3>Llave de chorro</h3>
-            <p>$9.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Sifon.png" alt="Sifon" onerror="this.src='https://via.placeholder.com/150?text=Sifon'">
-            <h3>Sifon</h3>
-            <p>$7.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Filtro de agua.png" alt="filtro de agua" onerror="this.src='https://via.placeholder.com/150?text=Filtro'">
-            <h3>Filtro de agua</h3>
-            <p>$25.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-
-        <div class="producto">
-            <img src="ImagenesProducto/Cemento.png" alt="Cemento" onerror="this.src='https://via.placeholder.com/150?text=Cemento'">
-            <h3>Cemento</h3>
-            <p>$9.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Arena.png" alt="Arena" onerror="this.src='https://via.placeholder.com/150?text=Arena'">
-            <h3>Arena</h3>
-            <p>$7.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Grava.png" alt="grava" onerror="this.src='https://via.placeholder.com/150?text=Grava'">
-            <h3>Grava</h3>
-            <p>$6.50</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Bloque.png" alt="Bloque" onerror="this.src='https://via.placeholder.com/150?text=Bloque'">
-            <h3>Bloque</h3>
-            <p>$1.50</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Varilla.png" alt="varilla" onerror="this.src='https://via.placeholder.com/150?text=Varilla'">
-            <h3>Varilla</h3>
-            <p>$12.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Ladrillo.png" alt="ladrillo" onerror="this.src='https://via.placeholder.com/150?text=Ladrillo'">
-            <h3>Ladrillo</h3>
-            <p>$0.80</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Yeso.png" alt="Yeso" onerror="this.src='https://via.placeholder.com/150?text=Yeso'">
-            <h3>Yeso</h3>
-            <p>$5.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Cal.png" alt="cal" onerror="this.src='https://via.placeholder.com/150?text=Cal'">
-            <h3>Cal</h3>
-            <p>$4.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Teja.png" alt="Teja" onerror="this.src='https://via.placeholder.com/150?text=Teja'">
-            <h3>Teja</h3>
-            <p>$3.50</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
-        <div class="producto">
-            <img src="ImagenesProducto/Piedra.png" alt="Piedra" onerror="this.src='https://via.placeholder.com/150?text=Piedra'">
-            <h3>Piedra</h3>
-            <p>$6.00</p>
-            <button class="btn-agregar">Agregar al Carrito</button>
-        </div>
+        
+        <%
+                } 
+            } else {
+        %>
+            <div class="alert alert-warning" style="width: 100%; text-align: center;">
+                No se encontraron productos en la base de datos. Asegúrate de ejecutar el Controlador primero.
+            </div>
+        <%
+            } 
+        %>
+        
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        // abrir/cerrar carrito
+        document.getElementById("btn-carrito").onclick = function() {
+            document.getElementById("ventana-carrito").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        };
+
+        document.getElementById("btn-cerrar-modal").onclick = function() {
+            document.getElementById("ventana-carrito").style.display = "none";
+            document.getElementById("overlay").style.display = "none";
+        };
+    </script>
 </body>
 </html>

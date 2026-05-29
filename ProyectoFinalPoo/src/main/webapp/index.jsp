@@ -4,6 +4,17 @@
     Author     : lalon
 --%>
 
+
+<%-- Validamos que el usuario haya iniciado sesión --%>
+<%
+    // Obtenemos el objeto usuario de la sesión
+    modelos.usuario userSession = (modelos.usuario) session.getAttribute("usuario");
+    
+    if (userSession == null) {
+        response.sendRedirect("login.jsp");
+        return; 
+    }
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -16,7 +27,9 @@
     
    <style>
         body {
-            background-image: url('ImagenDeInicio/Ferreteria.png') !important;
+            background-image: url('ImagenDeInicio/FotoFerreteria.png') !important;
+            background-size: cover; /* Esto ayuda a que la imagen se ajuste bien */
+            background-position: center;
         }
         <%@include file="css/estiloindex.css"%>
     </style>
@@ -26,11 +39,12 @@
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
         <div class="container-fluid">
             <div class="dropdown me-3">
+
                 <a class="btn btn-link nav-link dropdown-toggle text-white text-decoration-none" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    alan.aguirre
+                    <%= userSession.getNombre_real() %>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item text-danger" href="login.jsp">Cerrar Sesión 🚪</a></li>
+                    <li><a class="dropdown-item text-danger" href="controlador?accion=logout">Cerrar Sesión 🚪</a></li>
                 </ul>
             </div>
             
@@ -44,7 +58,7 @@
                         <a class="nav-link active fw-bold" href="index.jsp">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="interfazProducto.jsp">Productos</a>
+                        <a class="nav-link" href="ControladorProducto?accion=listar">Productos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="clientes.jsp">Clientes</a>
@@ -59,14 +73,10 @@
 
     <div class="welcome-wrapper">
         <div class="welcome-card-box">
-            
             <h1 id="saludo" class="saludo-title"></h1>
-            
             <div class="welcome-subtitle">
                 <p>Bienvenido al Sistema de la Ferretería</p> 
             </div>
-            
-            
         </div>
     </div>
 
@@ -74,18 +84,11 @@
         function obtenerSaludo() {
             const hora = new Date().getHours();
             let saludo = "";
-
-            if (hora >= 6 && hora < 12) {
-                saludo = "Buenos días";
-            } else if (hora >= 12 && hora < 18) {
-                saludo = "Buenas tardes";
-            } else {
-                saludo = "Buenas noches";
-            }
-
+            if (hora >= 6 && hora < 12) { saludo = "Buenos días"; } 
+            else if (hora >= 12 && hora < 18) { saludo = "Buenas tardes"; } 
+            else { saludo = "Buenas noches"; }
             return saludo;
         }
-
         document.getElementById("saludo").innerText = obtenerSaludo();
     </script>
 

@@ -29,7 +29,7 @@
         border-radius: 6px;
     }
     
-    /* Espaciado global obligatorio para las páginas que usen la barra */
+
     body {
         padding-top: 70px !important; /* Evita que la barra fija tape tus tablas o formularios */
     }
@@ -38,12 +38,20 @@
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
     <div class="container-fluid">
         <div class="dropdown me-3">
+            <%-- Recuperamos el objeto usuario de la sesión --%>
+            <%
+                modelos.usuario userSession = (modelos.usuario) session.getAttribute("usuario");
+            %>
+            
             <a class="btn btn-link nav-link dropdown-toggle text-white text-decoration-none" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                alan.aguirre
+                <%-- Mostramos el nombre real, si no existe ponemos 'Usuario' --%>
+                <%= (userSession != null) ? userSession.getNombre_real() : "Usuario" %>
             </a>
+            
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item text-danger" href="login.jsp">Cerrar Sesión 🚪</a></li>
+                <li><a class="dropdown-item text-danger" href="controlador?accion=logout">Cerrar Sesión 🚪</a></li>
             </ul>
+        </div>
         </div>
         
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
