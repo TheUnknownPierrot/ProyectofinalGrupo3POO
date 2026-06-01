@@ -15,6 +15,7 @@ import java.util.List;
 import modelos.Producto;
 import modelos.ProductoDao;
 
+//polimorfismo
 @WebServlet(name = "ControladorProducto", urlPatterns = {"/ControladorProducto"})
 public class controladorProducto extends HttpServlet {
 

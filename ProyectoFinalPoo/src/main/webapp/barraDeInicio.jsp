@@ -29,7 +29,6 @@
         border-radius: 6px;
     }
     
-
     body {
         padding-top: 70px !important; /* Evita que la barra fija tape tus tablas o formularios */
     }
@@ -49,9 +48,9 @@
             </a>
             
             <ul class="dropdown-menu">
+                <%-- Mantienes tu lógica de cierre de sesión apuntando a tu controlador principal --%>
                 <li><a class="dropdown-item text-danger" href="controlador?accion=logout">Cerrar Sesión 🚪</a></li>
             </ul>
-        </div>
         </div>
         
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,13 +63,13 @@
                     <a class="nav-link" href="index.jsp" id="nav-inicio">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="interfazProducto.jsp" id="nav-productos">Productos</a>
+                    <a class="nav-link" href="ControladorProducto?accion=listar" id="nav-productos">Productos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="clientes.jsp" id="nav-clientes">Clientes</a>
+                    <a class="nav-link" href="ControladorClientes?accion=listar" id="nav-clientes">Clientes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="reportes.jsp" id="nav-reportes">Reportes</a>
+                    <a class="nav-link" href="controladorReportes?accion=listar" id="nav-reportes">Reportes</a>
                 </li>
             </ul>
         </div>
